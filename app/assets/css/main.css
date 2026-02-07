@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'WebPlus_ToshibaSat_8x14';
+  src: url('/fonts/WebPlus_ToshibaSat_8x14.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    @apply bg-bg text-gray-400 font-mono antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen;
+    background-color: #050505;
+  }
+
+  ::selection {
+    @apply bg-white/15 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-800 hover:bg-gray-700 rounded-full;
+  }
+
+  .pixelated {
+    image-rendering: pixelated;
+  }
+
+  /* Prose link underline animation */
+  .prose a {
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.2s ease;
+  }
+
+  .prose a:hover {
+    background-size: 100% 1px;
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "blog": "Blog",
+    "projects": "Projetos",
+    "about": "Sobre",
+    "uses": "Ferramentas",
+    "now": "Agora"
+  },
+  "hero": {
+    "greeting": "Ola, eu sou",
+    "name": "0xw0tan",
+    "tagline": "Engenheiro backend & entusiasta de seguranca",
+    "subtitle": "Escrevo sobre engenharia de software, seguranca e as ferramentas que construo.",
+    "cta_blog": "Ler o blog",
+    "cta_projects": "Ver projetos"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Reflexoes sobre engenharia backend, seguranca e desenvolvimento de software.",
+    "all_tags": "Todos",
+    "no_posts": "Nenhum post encontrado.",
+    "recent_posts": "Posts Recentes",
+    "view_all": "Ver todos os posts"
+  },
+  "projects": {
+    "title": "Projetos",
+    "description": "Coisas que construi ou contribui.",
+    "source": "Codigo",
+    "live": "Demo"
+  },
+  "about": {
+    "title": "Sobre",
+    "description": "Um pouco sobre mim.",
+    "bio_title": "whoami",
+    "skills_title": "Habilidades",
+    "connect_title": "Contato"
+  },
+  "footer": {
+    "built_with": "Feito com Nuxt & hospedado no Cloudflare Pages",
+    "copyright": "0xw0tan"
+  },
+  "common": {
+    "read_more": "Leia mais",
+    "back": "Voltar",
+    "min_read": "min de leitura"
+  }
+}
