@@ -10,13 +10,23 @@ export default <Config>{
     extend: {
       colors: {
         bg: '#050505',
-        surface: '#111111',
-        border: '#222222',
-        muted: '#777777',
+        surface: '#0c0c0c',
+        'surface-raised': '#141414',
+        border: '#1a1a1a',
+        'border-bright': '#2a2a2a',
+        muted: '#666666',
+        accent: 'var(--color-accent)',
+        secondary: 'var(--color-secondary)',
+        tertiary: 'var(--color-tertiary)',
+        'theme-green': 'var(--color-green)',
+        'theme-red': 'var(--color-red)',
       },
       fontFamily: {
         mono: ['"JetBrains Mono"', '"Fira Code"', '"IBM Plex Mono"', 'monospace'],
         pixel: ['"WebPlus_ToshibaSat_8x14"', 'monospace'],
+      },
+      fontSize: {
+        '2xs': ['0.65rem', { lineHeight: '1rem' }],
       },
       animation: {
         blink: 'blink 1s step-end infinite',
@@ -30,30 +40,118 @@ export default <Config>{
       typography: {
         DEFAULT: {
           css: {
-            '--tw-prose-body': '#b5b5b5',
-            '--tw-prose-headings': '#e0e0e0',
-            '--tw-prose-links': '#ffffff',
-            '--tw-prose-bold': '#e0e0e0',
-            '--tw-prose-code': '#cccccc',
+            '--tw-prose-body': '#a8a8a8',
+            '--tw-prose-headings': '#e8e8e8',
+            '--tw-prose-links': 'var(--color-accent)',
+            '--tw-prose-bold': '#d4d4d4',
+            '--tw-prose-code': '#c0c0c0',
             '--tw-prose-pre-bg': '#0a0a0a',
-            '--tw-prose-pre-code': '#b5b5b5',
-            '--tw-prose-quotes': '#999999',
-            '--tw-prose-quote-borders': '#444444',
-            '--tw-prose-counters': '#999999',
-            '--tw-prose-bullets': '#777777',
-            '--tw-prose-hr': '#222222',
-            '--tw-prose-th-borders': '#222222',
-            '--tw-prose-td-borders': '#222222',
-            'a:hover': {
-              color: '#e0e0e0',
+            '--tw-prose-pre-code': '#a8a8a8',
+            '--tw-prose-quotes': '#888888',
+            '--tw-prose-quote-borders': '#2a2a2a',
+            '--tw-prose-counters': '#888888',
+            '--tw-prose-bullets': '#555555',
+            '--tw-prose-hr': '#1a1a1a',
+            '--tw-prose-th-borders': '#1a1a1a',
+            '--tw-prose-td-borders': '#1a1a1a',
+            // Headings
+            h1: {
+              fontWeight: '600',
+              letterSpacing: '-0.02em',
             },
+            h2: {
+              fontWeight: '600',
+              letterSpacing: '-0.01em',
+              marginTop: '2.5em',
+              marginBottom: '0.8em',
+            },
+            h3: {
+              fontWeight: '500',
+              letterSpacing: '-0.01em',
+              marginTop: '2em',
+              marginBottom: '0.6em',
+            },
+            h4: {
+              fontWeight: '500',
+              marginTop: '1.5em',
+            },
+            // Paragraphs
+            p: {
+              lineHeight: '1.85',
+              marginTop: '1.25em',
+              marginBottom: '1.25em',
+            },
+            // Lists
+            li: {
+              lineHeight: '1.8',
+              marginTop: '0.3em',
+              marginBottom: '0.3em',
+            },
+            'ul > li::marker': {
+              color: '#555555',
+            },
+            'ol > li::marker': {
+              color: '#666666',
+            },
+            // Links
+            a: {
+              fontWeight: '400',
+              textDecoration: 'none',
+            },
+            'a:hover': {
+              color: '#ffffff',
+            },
+            // Inline code
             'code::before': { content: '""' },
             'code::after': { content: '""' },
             code: {
-              backgroundColor: '#0a0a0a',
-              padding: '0.2em 0.4em',
-              borderRadius: '0.25rem',
+              backgroundColor: '#111111',
+              padding: '0.15em 0.4em',
+              borderRadius: '0.2rem',
               fontWeight: '400',
+              fontSize: '0.875em',
+              border: '1px solid #1a1a1a',
+            },
+            // Block quotes
+            blockquote: {
+              fontStyle: 'normal',
+              borderLeftWidth: '2px',
+              borderLeftColor: '#2a2a2a',
+              paddingLeft: '1.25em',
+            },
+            'blockquote p:first-of-type::before': { content: '""' },
+            'blockquote p:last-of-type::after': { content: '""' },
+            // Horizontal rules
+            hr: {
+              borderColor: '#1a1a1a',
+              marginTop: '2.5em',
+              marginBottom: '2.5em',
+            },
+            // Strong
+            strong: {
+              fontWeight: '600',
+            },
+            // Images
+            img: {
+              borderRadius: '0.375rem',
+            },
+            // Pre
+            pre: {
+              fontSize: '0.85em',
+              lineHeight: '1.75',
+            },
+            // Tables
+            thead: {
+              borderBottomColor: '#2a2a2a',
+            },
+            'thead th': {
+              fontWeight: '500',
+              color: '#c0c0c0',
+              paddingBottom: '0.75em',
+            },
+            'tbody td': {
+              paddingTop: '0.6em',
+              paddingBottom: '0.6em',
             },
           },
         },

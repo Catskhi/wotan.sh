@@ -24,3 +24,11 @@ Thumbs.db
 # Nitro
 .nitro/
 .cache/
+
+# Data
+.data/
+
+# agents
+.agent
+.agents
+.claude

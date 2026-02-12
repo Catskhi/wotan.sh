@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   modules: [
     '@nuxtjs/tailwindcss',
@@ -56,7 +56,15 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#050505' },
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: '/wotan/beta002-semfundo.png' },
+        { rel: 'icon', type: 'image/png', href: '/wotan/skull_transparent.png' },
+        { rel: 'alternate', type: 'application/rss+xml', title: '0xw0tan RSS Feed', href: '/rss.xml' },
+      ],
+      script: [
+        {
+          innerHTML: `(function(){try{var t=localStorage.getItem('theme');if(t&&t!=='catppuccin'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}})()`,
+          type: 'text/javascript',
+          tagPosition: 'head',
+        },
       ],
     },
   },
