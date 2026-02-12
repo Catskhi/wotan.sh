@@ -33,12 +33,33 @@
     "title": "Sobre",
     "description": "Um pouco sobre mim.",
     "bio_title": "whoami",
+    "bio_p1": "Engenheiro backend que se preocupa com arquitetura limpa, seguranca e construir ferramentas que funcionam bem. Passo a maior parte do tempo escrevendo Java, Go e TypeScript — geralmente com um terminal aberto e uma opiniao forte sobre indentacao.",
+    "bio_p2": "Quando nao estou programando, provavelmente estou lendo sobre sistemas distribuidos, mexendo em configs do Linux, ou mergulhando em algum assunto de seguranca. Este site e onde documento o que aprendo.",
     "skills_title": "Habilidades",
     "connect_title": "Contato"
   },
   "footer": {
     "built_with": "Feito com Nuxt & hospedado no Cloudflare Pages",
     "copyright": "0xw0tan"
+  },
+  "now": {
+    "title": "Agora",
+    "description": "No que estou focado atualmente.",
+    "last_updated": "Ultima atualizacao",
+    "working_on": "Trabalhando em",
+    "learning": "Aprendendo",
+    "reading": "Lendo",
+    "inspired_by": "Inspirado por"
+  },
+  "uses": {
+    "title": "Ferramentas",
+    "description": "Ferramentas, hardware e software que uso diariamente."
+  },
+  "palette": {
+    "placeholder": "Buscar paginas, posts...",
+    "no_results": "Nenhum resultado encontrado.",
+    "navigation": "Navegacao",
+    "posts": "Posts"
   },
   "common": {
     "read_more": "Leia mais",

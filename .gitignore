@@ -28,6 +28,14 @@ Thumbs.db
 # Data
 .data/
 
+# Planning docs
+0xw0tan-site-plan.md
+design-vision.md
+ideas.md
+skulls_background.md
+structure.md
+what_I_want.md
+
 # agents
 .agent
 .agents

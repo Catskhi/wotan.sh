@@ -33,12 +33,33 @@
     "title": "About",
     "description": "A bit about me.",
     "bio_title": "whoami",
+    "bio_p1": "Backend engineer who cares about clean architecture, security, and building tools that work well. I spend most of my time writing Java, Go, and TypeScript — usually with a terminal open and a strong opinion about indentation.",
+    "bio_p2": "When I'm not writing code, I'm probably reading about distributed systems, tinkering with Linux configs, or going down a security rabbit hole. This site is where I document what I learn.",
     "skills_title": "Skills",
     "connect_title": "Connect"
   },
   "footer": {
     "built_with": "Built with Nuxt & deployed on Cloudflare Pages",
     "copyright": "0xw0tan"
+  },
+  "now": {
+    "title": "Now",
+    "description": "What I'm currently focused on.",
+    "last_updated": "Last updated",
+    "working_on": "Currently working on",
+    "learning": "Learning",
+    "reading": "Reading",
+    "inspired_by": "Inspired by"
+  },
+  "uses": {
+    "title": "Uses",
+    "description": "Tools, hardware, and software I use daily."
+  },
+  "palette": {
+    "placeholder": "Search pages, posts...",
+    "no_results": "No results found.",
+    "navigation": "Navigation",
+    "posts": "Posts"
   },
   "common": {
     "read_more": "Read more",
