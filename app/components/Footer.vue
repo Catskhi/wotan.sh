@@ -1,15 +1,34 @@
-<script setup lang="ts">
-const { t } = useI18n()
-const year = new Date().getFullYear()
-</script>
-
 <template>
   <footer class="border-t border-border mt-auto">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-700">
-        <span>{{ t('footer.built_with') }}</span>
-        <span>&copy; {{ year }} {{ t('footer.copyright') }}</span>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      <!-- Box-drawing top border -->
+      <div class="text-border-bright text-xs mb-4 overflow-hidden select-none" aria-hidden="true">
+        ────────────────────────────────────────
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <SocialLinks class="text-sm" />
+          <a
+            href="/rss.xml"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted hover:text-accent transition-colors text-xs"
+            aria-label="RSS Feed"
+          >
+            [rss]
+          </a>
+        </div>
+        <div class="text-2xs text-muted text-center sm:text-right">
+          <p>{{ t('footer.built_with') }}</p>
+          <p class="mt-0.5">&copy; {{ year }} {{ t('footer.copyright') }}</p>
+        </div>
       </div>
     </div>
   </footer>
 </template>
+
+<script setup lang="ts">
+const { t } = useI18n()
+const year = new Date().getFullYear()
+</script>

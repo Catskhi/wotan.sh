@@ -1,82 +1,106 @@
-<script setup lang="ts">
-const { t } = useI18n()
-const localePath = useLocalePath()
-
-const navLinks = computed(() => [
-  { label: t('nav.home'), to: localePath('/') },
-  { label: t('nav.blog'), to: localePath('/blog') },
-  { label: t('nav.projects'), to: localePath('/projects') },
-  { label: t('nav.about'), to: localePath('/about') },
-])
-
-const mobileOpen = ref(false)
-
-const route = useRoute()
-watch(() => route.fullPath, () => {
-  mobileOpen.value = false
-})
-</script>
-
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-sm border-b border-border h-12 flex items-center">
-    <nav class="max-w-4xl w-full mx-auto px-4 sm:px-6 flex items-center justify-between">
-
+  <header class="sticky top-0 z-50 bg-bg/90 backdrop-blur-sm border-b border-border">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
       <!-- Brand -->
-      <NuxtLink :to="localePath('/')" class="text-white text-sm font-bold hover:opacity-70 transition-opacity">
-        0xw0tan
+      <NuxtLink :to="localePath('/')" class="flex items-center gap-2 group">
+        <img
+          src="/wotan/skull_transparent.png"
+          alt="0xw0tan"
+          class="w-7 h-7 opacity-80 group-hover:opacity-100 transition-opacity"
+        />
+        <span class="font-pixel text-sm text-gray-200 group-hover:text-accent transition-colors">
+          0xw0tan
+        </span>
       </NuxtLink>
 
       <!-- Desktop nav -->
-      <div class="hidden sm:flex items-center gap-6">
+      <nav class="hidden md:flex items-center gap-1">
         <NuxtLink
           v-for="link in navLinks"
-          :key="link.to"
-          :to="link.to"
-          class="text-gray-500 hover:text-white transition-colors text-xs uppercase tracking-wider"
-          active-class="!text-white"
+          :key="link.path"
+          :to="localePath(link.path)"
+          class="px-2.5 py-1.5 text-sm text-muted hover:text-accent transition-colors"
+          active-class="!text-accent"
         >
           {{ link.label }}
         </NuxtLink>
-        <div class="w-px h-4 bg-border" />
+        <div class="w-px h-4 bg-border mx-1.5" />
+        <!-- Search trigger -->
         <button
-          class="hidden lg:flex items-center gap-2 text-[10px] text-gray-600 hover:text-gray-400 transition-colors border border-border rounded px-2 py-1"
-          @click="$event.preventDefault(); window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))"
+          class="flex items-center gap-1.5 px-2 py-1 text-xs text-muted hover:text-accent transition-colors border border-border rounded"
+          @click="openPalette"
+          aria-label="Search"
         >
-          <span>Search</span>
-          <kbd class="text-[9px] border border-border rounded px-1">Ctrl+K</kbd>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <kbd class="text-2xs text-muted/60">⌘K</kbd>
         </button>
-        <div class="w-px h-4 bg-border" />
+        <div class="w-px h-4 bg-border mx-1.5" />
         <LanguageSwitcher />
-      </div>
+        <ThemeSwitcher />
+      </nav>
 
-      <!-- Mobile toggle -->
-      <div class="flex items-center gap-3 sm:hidden">
-        <LanguageSwitcher />
-        <button
-          class="text-gray-500 hover:text-white transition-colors text-sm"
-          @click="mobileOpen = !mobileOpen"
-        >
-          <span v-if="mobileOpen">&times;</span>
-          <span v-else>&#9776;</span>
-        </button>
-      </div>
-    </nav>
+      <!-- Mobile menu button -->
+      <button
+        class="md:hidden p-2 text-muted hover:text-accent transition-colors"
+        @click="mobileOpen = !mobileOpen"
+        :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
+      >
+        <svg v-if="!mobileOpen" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
 
     <!-- Mobile menu -->
-    <div
-      v-if="mobileOpen"
-      class="absolute top-12 left-0 right-0 bg-bg/95 backdrop-blur-sm border-b border-border flex flex-col"
+    <Transition
+      enter-active-class="transition duration-150 ease-out"
+      enter-from-class="opacity-0 -translate-y-2"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition duration-100 ease-in"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-2"
     >
-      <NuxtLink
-        v-for="link in navLinks"
-        :key="link.to"
-        :to="link.to"
-        class="text-gray-500 hover:text-white py-3 px-6 text-xs uppercase tracking-wider transition-colors border-b border-border/50"
-        active-class="!text-white"
-        @click="mobileOpen = false"
-      >
-        {{ link.label }}
-      </NuxtLink>
-    </div>
+      <div v-if="mobileOpen" class="md:hidden border-t border-border bg-bg/95 backdrop-blur-sm">
+        <nav class="max-w-3xl mx-auto px-4 py-3 flex flex-col gap-1">
+          <NuxtLink
+            v-for="link in navLinks"
+            :key="link.path"
+            :to="localePath(link.path)"
+            class="px-3 py-2 text-sm text-muted hover:text-accent transition-colors"
+            active-class="!text-accent"
+            @click="mobileOpen = false"
+          >
+            ~/{{ link.label.toLowerCase() }}
+          </NuxtLink>
+          <div class="border-t border-border my-1" />
+          <div class="flex items-center gap-2 px-3 py-2">
+            <LanguageSwitcher />
+            <ThemeSwitcher />
+          </div>
+        </nav>
+      </div>
+    </Transition>
   </header>
 </template>
+
+<script setup lang="ts">
+const { t } = useI18n()
+const localePath = useLocalePath()
+const mobileOpen = ref(false)
+
+const navLinks = computed(() => [
+  { path: '/blog', label: t('nav.blog') },
+  { path: '/projects', label: t('nav.projects') },
+  { path: '/about', label: t('nav.about') },
+])
+
+function openPalette() {
+  // Dispatch Ctrl+K to trigger CommandPalette
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))
+}
+</script>

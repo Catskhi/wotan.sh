@@ -1,48 +1,64 @@
+<template>
+  <div v-if="links?.length" class="mb-8">
+    <button
+      @click="open = !open"
+      class="flex items-center gap-2 text-xs text-muted hover:text-accent transition-colors mb-2"
+    >
+      <span>{{ open ? '[-]' : '[+]' }}</span>
+      <span>table of contents</span>
+    </button>
+
+    <Transition
+      enter-active-class="transition duration-150 ease-out"
+      enter-from-class="opacity-0 max-h-0"
+      enter-to-class="opacity-100 max-h-96"
+      leave-active-class="transition duration-100 ease-in"
+      leave-from-class="opacity-100 max-h-96"
+      leave-to-class="opacity-0 max-h-0"
+    >
+      <nav v-if="open" class="border-l border-border pl-3 overflow-hidden">
+        <ul class="space-y-1">
+          <li
+            v-for="link in flatLinks"
+            :key="link.id"
+            :style="{ paddingLeft: `${(link.depth - 2) * 12}px` }"
+          >
+            <a
+              :href="`#${link.id}`"
+              class="text-xs text-muted hover:text-accent transition-colors block py-0.5"
+            >
+              {{ link.text }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </Transition>
+  </div>
+</template>
+
 <script setup lang="ts">
-defineProps<{
-  links: Array<{
-    id: string
-    text: string
-    depth: number
-    children?: Array<{ id: string; text: string; depth: number }>
-  }>
+interface TocLink {
+  id: string
+  text: string
+  depth: number
+  children?: TocLink[]
+}
+
+const props = defineProps<{
+  links: TocLink[]
 }>()
 
-const open = ref(false)
-</script>
+const open = ref(true)
 
-<template>
-  <nav v-if="links?.length" class="border border-border rounded-lg mb-8">
-    <button
-      class="w-full flex items-center justify-between px-4 py-3 text-xs text-gray-500 uppercase tracking-[0.2em] hover:text-gray-300 transition-colors"
-      @click="open = !open"
-    >
-      <span>Table of Contents</span>
-      <span class="text-gray-700 transition-transform duration-200" :class="open && 'rotate-180'">
-        &#9660;
-      </span>
-    </button>
-    <div v-show="open" class="px-4 pb-4 space-y-1">
-      <template v-for="link in links" :key="link.id">
-        <a
-          :href="`#${link.id}`"
-          class="block text-sm text-gray-600 hover:text-white transition-colors py-1"
-          @click="open = false"
-        >
-          {{ link.text }}
-        </a>
-        <template v-if="link.children?.length">
-          <a
-            v-for="child in link.children"
-            :key="child.id"
-            :href="`#${child.id}`"
-            class="block text-sm text-gray-700 hover:text-gray-300 transition-colors py-1 pl-4"
-            @click="open = false"
-          >
-            {{ child.text }}
-          </a>
-        </template>
-      </template>
-    </div>
-  </nav>
-</template>
+const flatLinks = computed(() => {
+  const flat: TocLink[] = []
+  function walk(items: TocLink[]) {
+    for (const item of items) {
+      flat.push(item)
+      if (item.children?.length) walk(item.children)
+    }
+  }
+  walk(props.links || [])
+  return flat
+})
+</script>

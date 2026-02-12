@@ -1,26 +1,25 @@
+<template>
+  <component
+    :is="clickable ? 'button' : 'span'"
+    class="text-2xs font-mono text-muted transition-colors"
+    :class="[
+      active ? '!text-accent' : '',
+      clickable ? 'hover:text-accent cursor-pointer' : '',
+    ]"
+    @click="clickable && $emit('click')"
+  >
+    [{{ tag }}]
+  </component>
+</template>
+
 <script setup lang="ts">
 defineProps<{
   tag: string
-  active?: boolean
   clickable?: boolean
+  active?: boolean
 }>()
 
 defineEmits<{
   click: []
 }>()
 </script>
-
-<template>
-  <span
-    :class="[
-      'inline-block text-xs px-2 py-0.5 rounded border transition-colors',
-      active
-        ? 'bg-white/5 border-gray-600 text-gray-300'
-        : 'border-border text-gray-700',
-      clickable && 'cursor-pointer hover:border-gray-600 hover:text-gray-300',
-    ]"
-    @click="clickable && $emit('click')"
-  >
-    {{ tag }}
-  </span>
-</template>

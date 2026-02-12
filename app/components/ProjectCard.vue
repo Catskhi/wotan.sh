@@ -1,47 +1,50 @@
-<script setup lang="ts">
-const { t } = useI18n()
-
-defineProps<{
-  name: string
-  description: string
-  tech: string[]
-  github?: string
-  live?: string
-}>()
-</script>
-
 <template>
-  <div class="border border-border rounded-lg p-4 sm:p-5 hover:border-gray-700 transition-colors space-y-3">
-    <h3 class="text-base font-medium text-gray-200">{{ name }}</h3>
-    <p class="text-sm text-gray-600">{{ description }}</p>
-    <div class="flex flex-wrap gap-2">
-      <span
-        v-for="item in tech"
-        :key="item"
-        class="text-xs px-2 py-0.5 rounded border border-border text-gray-700"
-      >
-        {{ item }}
-      </span>
+  <div class="border border-border p-4 hover:border-accent/30 transition-colors">
+    <!-- Project name -->
+    <h3 class="text-sm font-medium text-gray-200 mb-1">
+      {{ project.name }}
+    </h3>
+
+    <!-- Description -->
+    <p class="text-xs text-muted mb-3">
+      {{ project.description }}
+    </p>
+
+    <!-- Tech tags -->
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      <TagBadge v-for="tag in project.tech" :key="tag" :tag="tag" />
     </div>
-    <div class="flex gap-3 pt-1">
+
+    <!-- Links -->
+    <div class="flex items-center gap-3 text-xs">
       <a
-        v-if="github"
-        :href="github"
+        v-if="project.github"
+        :href="project.github"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-xs text-gray-600 hover:text-white transition-colors"
+        class="text-muted hover:text-accent transition-colors"
       >
         [{{ t('projects.source') }}]
       </a>
       <a
-        v-if="live"
-        :href="live"
+        v-if="project.live"
+        :href="project.live"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-xs text-gray-600 hover:text-white transition-colors"
+        class="text-muted hover:text-accent transition-colors"
       >
         [{{ t('projects.live') }}]
       </a>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import type { Project } from '~/utils/projects'
+
+defineProps<{
+  project: Project
+}>()
+
+const { t } = useI18n()
+</script>
