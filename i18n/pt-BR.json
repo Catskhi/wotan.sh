@@ -11,9 +11,20 @@
     "greeting": "Ola, eu sou",
     "name": "0xw0tan",
     "tagline": "Engenheiro backend & entusiasta de seguranca",
+    "taglines": [
+      "engenheiro backend & entusiasta de seguranca"
+    ],
     "subtitle": "Escrevo sobre engenharia de software, seguranca e as ferramentas que construo.",
     "cta_blog": "Ler o blog",
-    "cta_projects": "Ver projetos"
+    "cta_projects": "Ver projetos",
+    "latest": "recente",
+    "search_hint": "ctrl+k para buscar",
+    "neofetch": {
+      "stack": "java / go / ts / python",
+      "focus": "backend & seguranca",
+      "shell": "fish",
+      "theme": "catppuccin"
+    }
   },
   "blog": {
     "title": "Blog",
