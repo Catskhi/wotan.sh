@@ -1,52 +1,41 @@
-<script setup lang="ts">
-const props = defineProps<{
-  error: {
-    statusCode: number
-    statusMessage?: string
-    message?: string
-  }
-}>()
-
-const localePath = useLocalePath()
-
-const asciiSkull = `
-    ██████████
-  ██          ██
-██   ██  ██    ██
-██              ██
-██    ██████    ██
-  ██  ██  ██  ██
-    ██████████
-       ████
-`
-
-function handleError() {
-  clearError({ redirect: localePath('/') })
-}
-</script>
-
 <template>
-  <div class="min-h-screen bg-bg flex flex-col items-center justify-center px-4 font-mono">
-    <pre class="text-gray-700 text-xs leading-none select-none mb-8">{{ asciiSkull }}</pre>
+  <div class="min-h-screen bg-bg font-mono flex flex-col items-center justify-center px-4 text-center">
+    <pre class="text-accent text-xs sm:text-sm mb-6 select-none leading-tight">{{ ASCII_SKULL }}</pre>
 
-    <h1 class="text-white text-4xl font-bold mb-2">
-      {{ error.statusCode }}
+    <h1 class="text-xl font-semibold text-gray-100 mb-2">
+      {{ is404 ? 'SIGSEGV' : 'SIGABRT' }}
     </h1>
 
-    <p class="text-gray-600 text-sm mb-8">
-      <template v-if="error.statusCode === 404">
-        Segmentation fault (core dumped)
-      </template>
-      <template v-else>
-        {{ error.statusMessage || 'Something went wrong' }}
-      </template>
+    <p class="text-sm text-muted mb-1">
+      {{ is404 ? 'Segmentation fault — page not found' : 'Something went wrong' }}
+    </p>
+
+    <p class="text-2xs text-border-bright mb-6">
+      {{ is404 ? `exit code 404` : `exit code ${error?.statusCode || 500}` }}
     </p>
 
     <button
-      class="text-xs text-gray-600 hover:text-white transition-colors border border-border hover:border-gray-600 rounded px-4 py-2"
       @click="handleError"
+      class="px-4 py-2 text-xs border border-accent text-accent hover:bg-accent hover:text-bg transition-colors"
     >
       cd ~
     </button>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ASCII_SKULL } from '~/utils/ascii'
+
+const props = defineProps<{
+  error: {
+    statusCode?: number
+    message?: string
+  }
+}>()
+
+const is404 = computed(() => props.error?.statusCode === 404)
+
+function handleError() {
+  clearError({ redirect: '/' })
+}
+</script>

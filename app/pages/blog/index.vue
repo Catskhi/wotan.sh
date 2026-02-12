@@ -1,66 +1,77 @@
-<script setup lang="ts">
-const { t, locale } = useI18n()
-
-useSeoMeta({
-  title: `${t('blog.title')} | 0xw0tan`,
-  description: t('blog.description'),
-})
-
-const { data: posts } = await useAsyncData(`blog-posts-${locale.value}`, () =>
-  queryCollection('blog')
-    .where('draft', '=', false)
-    .where('lang', '=', locale.value)
-    .order('date', 'DESC')
-    .all()
-)
-
-const allTags = computed(() => {
-  if (!posts.value) return []
-  const tagSet = new Set<string>()
-  posts.value.forEach((p) => p.tags?.forEach((t: string) => tagSet.add(t)))
-  return Array.from(tagSet).sort()
-})
-
-const activeTag = ref<string | null>(null)
-
-const filteredPosts = computed(() => {
-  if (!posts.value) return []
-  if (!activeTag.value) return posts.value
-  return posts.value.filter((p) => p.tags?.includes(activeTag.value!))
-})
-
-function toggleTag(tag: string) {
-  activeTag.value = activeTag.value === tag ? null : tag
-}
-</script>
-
 <template>
   <div>
     <header class="mb-8">
-      <h1 class="text-xl font-bold text-gray-100 mb-2">{{ t('blog.title') }}</h1>
-      <p class="text-sm text-gray-600">{{ t('blog.description') }}</p>
+      <h1 class="text-xl font-semibold text-gray-100 mb-1">
+        {{ t('blog.title') }}
+      </h1>
+      <p class="text-sm text-muted">
+        {{ t('blog.description') }}
+      </p>
     </header>
 
-    <div v-if="allTags.length" class="flex flex-wrap gap-2 mb-8">
+    <!-- Tag filter -->
+    <div v-if="allTags.length" class="flex flex-wrap gap-1.5 mb-6">
       <TagBadge
         :tag="t('blog.all_tags')"
+        :clickable="true"
         :active="!activeTag"
-        clickable
-        @click="activeTag = null"
+        @click="activeTag = ''"
       />
       <TagBadge
         v-for="tag in allTags"
         :key="tag"
         :tag="tag"
+        :clickable="true"
         :active="activeTag === tag"
-        clickable
-        @click="toggleTag(tag)"
+        @click="activeTag = activeTag === tag ? '' : tag"
       />
     </div>
 
-    <div v-if="filteredPosts.length" class="space-y-4">
-      <PostCard v-for="post in filteredPosts" :key="post.path" :post="post" />
+    <BoxDivider />
+
+    <!-- Posts list -->
+    <div v-if="filteredPosts.length" class="space-y-2">
+      <PostCard
+        v-for="post in filteredPosts"
+        :key="post.stem"
+        :post="post"
+      />
     </div>
-    <p v-else class="text-gray-600 text-sm">{{ t('blog.no_posts') }}</p>
+
+    <p v-else class="text-sm text-muted py-8 text-center">
+      {{ t('blog.no_posts') }}
+    </p>
   </div>
 </template>
+
+<script setup lang="ts">
+const { t, locale } = useI18n()
+
+const { data: posts } = await useAsyncData(
+  `blog-posts-${locale.value}`,
+  () => queryCollection('blog')
+    .where('lang', '=', locale.value)
+    .where('draft', '=', false)
+    .order('date', 'DESC')
+    .all()
+)
+
+const activeTag = ref('')
+
+const allTags = computed(() => {
+  if (!posts.value) return []
+  const tags = new Set<string>()
+  posts.value.forEach(p => p.tags?.forEach(t => tags.add(t)))
+  return [...tags].sort()
+})
+
+const filteredPosts = computed(() => {
+  if (!posts.value) return []
+  if (!activeTag.value) return posts.value
+  return posts.value.filter(p => p.tags?.includes(activeTag.value))
+})
+
+useHead({
+  title: `${t('blog.title')} - 0xw0tan`,
+})
+</script>

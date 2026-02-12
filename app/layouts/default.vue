@@ -1,10 +1,18 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="min-h-screen bg-bg font-mono flex flex-col">
     <Header />
-    <CommandPalette />
-    <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-8">
+    <main class="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-8">
       <slot />
     </main>
     <Footer />
+    <CommandPalette />
   </div>
 </template>
+
+<script setup lang="ts">
+const { initTheme } = useTheme()
+
+onMounted(() => {
+  initTheme()
+})
+</script>

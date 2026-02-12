@@ -1,87 +1,89 @@
-<script setup lang="ts">
-const { t } = useI18n()
-
-useSeoMeta({
-  title: `${t('about.title')} | 0xw0tan`,
-  description: t('about.description'),
-})
-
-const skills = [
-  { category: 'Languages', items: ['Java', 'Go', 'Python', 'TypeScript'] },
-  { category: 'Backend', items: ['Spring Boot', 'gRPC', 'REST', 'PostgreSQL', 'Redis'] },
-  { category: 'DevOps', items: ['Docker', 'Kubernetes', 'CI/CD', 'Linux'] },
-  { category: 'Security', items: ['OWASP', 'Pentesting', 'Cryptography'] },
-]
-
-const socials = [
-  { name: 'GitHub', url: 'https://github.com/0xw0tan' },
-  { name: 'Twitter/X', url: 'https://x.com/0xw0tan' },
-  { name: 'LinkedIn', url: 'https://linkedin.com/in/0xw0tan' },
-]
-</script>
-
 <template>
   <div>
-    <header class="mb-10">
-      <h1 class="text-xl font-bold text-gray-100 mb-2">{{ t('about.title') }}</h1>
+    <header class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <!-- Small skull -->
+        <div class="skull-small" aria-hidden="true" />
+        <div>
+          <h1 class="text-xl font-semibold text-gray-100">
+            $ {{ t('about.bio_title') }}
+          </h1>
+          <p class="text-sm text-muted">
+            {{ t('about.description') }}
+          </p>
+        </div>
+      </div>
     </header>
 
-    <section class="mb-12">
-      <h2 class="text-xs font-medium text-gray-500 uppercase tracking-[0.2em] mb-4">
-        {{ t('about.bio_title') }}
-      </h2>
-      <div class="text-sm text-gray-400 space-y-3 leading-relaxed max-w-xl">
-        <p>
-          Backend engineer focused on building reliable, secure systems. I enjoy working close to the metal —
-          understanding how things break to build them better.
-        </p>
-        <p>
-          When I'm not writing code, I'm probably reading about security research, contributing to open source,
-          or experimenting with new tools.
-        </p>
-      </div>
+    <BoxDivider />
+
+    <!-- Bio -->
+    <section class="mb-8">
+      <p class="text-sm text-gray-300 leading-relaxed mb-4">
+        {{ t('about.bio_p1') }}
+      </p>
+      <p class="text-sm text-gray-300 leading-relaxed">
+        {{ t('about.bio_p2') }}
+      </p>
     </section>
 
-    <section class="mb-12">
-      <h2 class="text-xs font-medium text-gray-500 uppercase tracking-[0.2em] mb-5">
-        {{ t('about.skills_title') }}
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <!-- Skills -->
+    <BoxDivider :label="t('about.skills_title')" />
+
+    <section class="mb-8">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <div
-          v-for="group in skills"
-          :key="group.category"
-          class="border border-border rounded-lg p-4"
+          v-for="skill in skills"
+          :key="skill"
+          class="text-xs text-muted"
         >
-          <h3 class="text-sm font-medium text-gray-300 mb-3">{{ group.category }}</h3>
-          <div class="flex flex-wrap gap-2">
-            <span
-              v-for="item in group.items"
-              :key="item"
-              class="text-xs px-2 py-0.5 rounded border border-border text-gray-700"
-            >
-              {{ item }}
-            </span>
-          </div>
+          <span class="text-accent mr-1">></span>{{ skill }}
         </div>
       </div>
     </section>
 
+    <!-- Connect -->
+    <BoxDivider :label="t('about.connect_title')" />
+
     <section>
-      <h2 class="text-xs font-medium text-gray-500 uppercase tracking-[0.2em] mb-4">
-        {{ t('about.connect_title') }}
-      </h2>
-      <div class="flex gap-4">
-        <a
-          v-for="social in socials"
-          :key="social.name"
-          :href="social.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-sm text-gray-600 hover:text-white transition-colors"
-        >
-          {{ social.name }}
-        </a>
-      </div>
+      <SocialLinks />
     </section>
   </div>
 </template>
+
+<script setup lang="ts">
+const { t } = useI18n()
+
+const skills = [
+  'Java / Spring Boot',
+  'Go',
+  'TypeScript / Node.js',
+  'Python',
+  'PostgreSQL / Redis',
+  'Docker / K8s',
+  'AWS / GCP',
+  'Linux',
+  'Security / Pentesting',
+]
+
+useHead({
+  title: `${t('about.title')} - 0xw0tan`,
+})
+</script>
+
+<style scoped>
+.skull-small {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-accent);
+  mask-image: url('/wotan/skull_transparent.png');
+  -webkit-mask-image: url('/wotan/skull_transparent.png');
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+  flex-shrink: 0;
+}
+</style>

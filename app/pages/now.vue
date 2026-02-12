@@ -1,56 +1,87 @@
-<script setup lang="ts">
-useSeoMeta({
-  title: 'Now | 0xw0tan',
-  description: 'What I\'m currently working on and thinking about.',
-})
-</script>
-
 <template>
   <div>
-    <header class="mb-10">
-      <h1 class="text-xl font-bold text-gray-100 mb-2">Now</h1>
-      <p class="text-sm text-gray-600">
-        What I'm currently focused on.
-        <span class="text-gray-700">Updated February 2026.</span>
+    <header class="mb-8">
+      <h1 class="text-xl font-semibold text-gray-100 mb-1">
+        $ {{ t('now.title') }}
+      </h1>
+      <p class="text-sm text-muted">
+        {{ t('now.description') }}
+      </p>
+      <p class="text-2xs text-muted/50 mt-2">
+        {{ t('now.last_updated') }}: {{ lastUpdated }}
       </p>
     </header>
 
-    <div class="space-y-8 text-sm text-gray-400 leading-relaxed max-w-xl">
-      <section>
-        <h2 class="text-xs font-medium text-gray-500 uppercase tracking-[0.2em] mb-3">
-          Building
-        </h2>
-        <ul class="space-y-2">
-          <li>This personal site — iterating on design and writing new posts.</li>
-          <li>Security tooling in Go — lightweight scanners and automation.</li>
-          <li>Contributing to open source projects in the backend/infra space.</li>
-        </ul>
-      </section>
+    <BoxDivider />
 
-      <section>
-        <h2 class="text-xs font-medium text-gray-500 uppercase tracking-[0.2em] mb-3">
-          Learning
-        </h2>
-        <ul class="space-y-2">
-          <li>Low-level systems programming — diving deeper into memory management and OS internals.</li>
-          <li>Malware analysis and reverse engineering techniques.</li>
-          <li>Rust — exploring it for performance-critical security tools.</li>
-        </ul>
-      </section>
+    <!-- Currently working on -->
+    <section class="mb-8">
+      <h2 class="text-sm font-medium text-gray-200 mb-4 flex items-center gap-2">
+        <span class="text-accent">></span> {{ t('now.working_on') }}
+      </h2>
+      <ul class="space-y-2">
+        <li v-for="item in workingOn" :key="item" class="text-sm text-gray-300 flex items-start gap-2">
+          <span class="text-muted shrink-0">-</span>
+          <span>{{ item }}</span>
+        </li>
+      </ul>
+    </section>
 
-      <section>
-        <h2 class="text-xs font-medium text-gray-500 uppercase tracking-[0.2em] mb-3">
-          Reading
-        </h2>
-        <ul class="space-y-2">
-          <li>Security research papers and CTF writeups.</li>
-          <li>Technical blogs from engineers I respect.</li>
-        </ul>
-      </section>
-    </div>
+    <!-- Currently learning -->
+    <BoxDivider :label="t('now.learning')" />
+    <section class="mb-8">
+      <ul class="space-y-2">
+        <li v-for="item in learning" :key="item" class="text-sm text-gray-300 flex items-start gap-2">
+          <span class="text-muted shrink-0">-</span>
+          <span>{{ item }}</span>
+        </li>
+      </ul>
+    </section>
 
-    <p class="text-xs text-gray-700 mt-12">
-      Inspired by <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400 transition-colors">nownownow.com</a>.
+    <!-- Currently reading -->
+    <BoxDivider :label="t('now.reading')" />
+    <section class="mb-8">
+      <ul class="space-y-2">
+        <li v-for="item in reading" :key="item" class="text-sm text-gray-300 flex items-start gap-2">
+          <span class="text-muted shrink-0">-</span>
+          <span>{{ item }}</span>
+        </li>
+      </ul>
+    </section>
+
+    <BoxDivider />
+
+    <p class="text-2xs text-muted mt-4">
+      {{ t('now.inspired_by') }}
+      <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">nownownow.com</a>
     </p>
   </div>
 </template>
+
+<script setup lang="ts">
+const { t } = useI18n()
+
+const lastUpdated = 'February 2026'
+
+const workingOn = [
+  'Building this personal site (Nuxt + Tailwind)',
+  'CTF challenges on HackingClub & HackTheBox',
+  'A message broker from scratch in Java',
+]
+
+const learning = [
+  'Advanced Spring Boot internals',
+  'Kubernetes networking & service mesh',
+  'Binary exploitation & reverse engineering',
+  'Go concurrency patterns',
+]
+
+const reading = [
+  'Designing Data-Intensive Applications — Martin Kleppmann',
+  'The Art of Exploitation — Jon Erickson',
+]
+
+useHead({
+  title: `${t('now.title')} - 0xw0tan`,
+})
+</script>
