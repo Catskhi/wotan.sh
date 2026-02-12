@@ -12,7 +12,7 @@
     <!-- Content -->
     <div class="relative z-10 flex flex-col items-center px-4">
       <!-- Skull with CSS mask-image for theme-aware color -->
-      <div class="skull-container mb-6" aria-hidden="true">
+      <div class="skull-container mb-6" :class="{ 'skull-glitch': glitching }" aria-hidden="true">
         <div class="skull-mask" :class="mouthOpen ? 'mouth-open' : 'mouth-closed'" />
       </div>
 
@@ -62,9 +62,10 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 
 const mouthOpen = ref(false)
+const glitching = ref(true)
 
 onMounted(() => {
-  // Sequence: closed → open → closed → open (ends open)
+  // Sequence: closed → open → closed → open (ends open), glitch throughout
   setTimeout(() => {
     mouthOpen.value = true
   }, 400)
@@ -73,6 +74,7 @@ onMounted(() => {
   }, 900)
   setTimeout(() => {
     mouthOpen.value = true
+    glitching.value = false
   }, 1400)
 })
 </script>
@@ -118,6 +120,102 @@ onMounted(() => {
 .skull-mask.mouth-open {
   mask-image: url('/wotan/skull_transparent.png');
   -webkit-mask-image: url('/wotan/skull_transparent.png');
+}
+
+/* Glitch effect — horizontal slice displacement + jitter + flicker */
+.skull-glitch {
+  animation: skull-glitch-shift 120ms steps(1) infinite;
+}
+
+.skull-glitch .skull-mask {
+  animation: skull-glitch-slice 80ms steps(1) infinite;
+}
+
+@keyframes skull-glitch-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-3px, 1px);
+  }
+  20% {
+    transform: translate(4px, -1px);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(1px, -3px);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(3px, 0);
+  }
+  60% {
+    transform: translate(-4px, 1px);
+    opacity: 0.5;
+  }
+  70% {
+    transform: translate(2px, -2px);
+  }
+  80% {
+    transform: translate(0, 3px);
+    opacity: 1;
+  }
+  90% {
+    transform: translate(-1px, -1px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes skull-glitch-slice {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+  10% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translateX(6px);
+  }
+  20% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+  30% {
+    clip-path: inset(50% 0 20% 0);
+    transform: translateX(-8px);
+  }
+  40% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+  50% {
+    clip-path: inset(10% 0 70% 0);
+    transform: translateX(4px);
+  }
+  60% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+  70% {
+    clip-path: inset(65% 0 10% 0);
+    transform: translateX(-5px);
+  }
+  80% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+  90% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translateX(7px);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
 }
 
 .scroll-line {

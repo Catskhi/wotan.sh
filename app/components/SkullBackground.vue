@@ -18,6 +18,10 @@ interface SkullParticle {
   mouthOpen: boolean
   mouthTimer: number
   polarity: number // 1 = open is bright, -1 = closed is bright
+  // Glitch state
+  isGlitching: boolean
+  glitchTimeLeft: number
+  nextGlitchIn: number
 }
 
 const canvas = ref<HTMLCanvasElement | null>(null)
@@ -36,6 +40,12 @@ const MAX_SPEED = 2
 const DENSITY_REF = 1920 * 1080
 const MIN_MOUTH_INTERVAL = 0.5
 const MAX_MOUTH_INTERVAL = 2.5
+const MIN_GLITCH_DURATION = 0.08
+const MAX_GLITCH_DURATION = 0.35
+const MIN_GLITCH_INTERVAL = 3
+const MAX_GLITCH_INTERVAL = 12
+const GLITCH_SLICE_COUNT = 4
+const GLITCH_MAX_OFFSET = 8
 
 function rand(min: number, max: number): number {
   return Math.random() * (max - min) + min
@@ -78,6 +88,9 @@ function createParticle(w: number, h: number, offscreen = false): SkullParticle 
     mouthOpen,
     mouthTimer: rand(MIN_MOUTH_INTERVAL, MAX_MOUTH_INTERVAL),
     polarity,
+    isGlitching: false,
+    glitchTimeLeft: 0,
+    nextGlitchIn: rand(MIN_GLITCH_INTERVAL, MAX_GLITCH_INTERVAL),
   }
 }
 
@@ -137,10 +150,44 @@ function animate(time: number) {
       p.opacity = isBright ? BRIGHT_OPACITY : DIM_OPACITY
     }
 
+    // Glitch timer
+    if (p.isGlitching) {
+      p.glitchTimeLeft -= dt
+      if (p.glitchTimeLeft <= 0) {
+        p.isGlitching = false
+        p.nextGlitchIn = rand(MIN_GLITCH_INTERVAL, MAX_GLITCH_INTERVAL)
+      }
+    } else {
+      p.nextGlitchIn -= dt
+      if (p.nextGlitchIn <= 0) {
+        p.isGlitching = true
+        p.glitchTimeLeft = rand(MIN_GLITCH_DURATION, MAX_GLITCH_DURATION)
+      }
+    }
+
     // Draw
-    ctx.globalAlpha = Math.max(0.03, p.opacity)
     const img = p.mouthOpen ? skullOpenImg : skullClosedImg
-    ctx.drawImage(img, p.x, p.y, p.size, p.size)
+
+    if (p.isGlitching) {
+      // Glitch draw — horizontal slices with random offsets + opacity flicker
+      const flickerAlpha = Math.random() > 0.3 ? p.opacity : p.opacity * (0.3 + Math.random() * 0.7)
+      ctx.globalAlpha = Math.max(0.03, flickerAlpha)
+
+      const sliceH = p.size / GLITCH_SLICE_COUNT
+      for (let i = 0; i < GLITCH_SLICE_COUNT; i++) {
+        const srcY = (i / GLITCH_SLICE_COUNT) * img.naturalHeight
+        const srcH = img.naturalHeight / GLITCH_SLICE_COUNT
+        const offsetX = (Math.random() - 0.5) * GLITCH_MAX_OFFSET * 2
+        ctx.drawImage(
+          img,
+          0, srcY, img.naturalWidth, srcH,
+          p.x + offsetX, p.y + sliceH * i, p.size, sliceH,
+        )
+      }
+    } else {
+      ctx.globalAlpha = Math.max(0.03, p.opacity)
+      ctx.drawImage(img, p.x, p.y, p.size, p.size)
+    }
 
     // Respawn if off-screen
     if (p.x > w + p.size || p.y > h + p.size) {
@@ -155,6 +202,9 @@ function animate(time: number) {
       p.mouthTimer = fresh.mouthTimer
       p.polarity = fresh.polarity
       p.opacity = fresh.opacity
+      p.isGlitching = fresh.isGlitching
+      p.glitchTimeLeft = fresh.glitchTimeLeft
+      p.nextGlitchIn = fresh.nextGlitchIn
     }
   }
 
