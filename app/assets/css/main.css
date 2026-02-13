@@ -9,8 +9,29 @@
   font-display: swap;
 }
 
-/* ── Theme: Catppuccin Mocha (default) ── */
+/* ── Theme: W0tan (default) ── */
 :root {
+  --color-accent: #e0dcd4;
+  --color-secondary: #8a9aad;
+  --color-tertiary: #9a8e78;
+  --color-green: #7a8a6e;
+  --color-red: #8a4444;
+  --color-aberration-a: #884444;
+  --color-aberration-b: #446688;
+
+  --prose-body: #b8b4ae;
+  --prose-heading: #e0dcd4;
+  --prose-bold: #d4d0c8;
+  --prose-code: #d4d0c8;
+  --prose-code-bg: #141210;
+  --prose-code-border: #1e1c18;
+  --prose-pre-bg: #0a0a08;
+  --prose-muted: #5e5a54;
+  --prose-border: #1e1c18;
+}
+
+/* ── Theme: Catppuccin Mocha ── */
+[data-theme="catppuccin"] {
   --color-accent: #cba6f7;
   --color-secondary: #89b4fa;
   --color-tertiary: #f9e2af;
@@ -18,6 +39,16 @@
   --color-red: #f38ba8;
   --color-aberration-a: #f38ba8;
   --color-aberration-b: #89b4fa;
+
+  --prose-body: #cdd6f4;
+  --prose-heading: #e8e8e8;
+  --prose-bold: #e0e0e0;
+  --prose-code: #cba6f7;
+  --prose-code-bg: #181825;
+  --prose-code-border: #313244;
+  --prose-pre-bg: #0e0e16;
+  --prose-muted: #6c7086;
+  --prose-border: #313244;
 }
 
 /* ── Theme: Tokyo Night ── */
@@ -29,6 +60,16 @@
   --color-red: #f7768e;
   --color-aberration-a: #f7768e;
   --color-aberration-b: #bb9af7;
+
+  --prose-body: #a9b1d6;
+  --prose-heading: #c0caf5;
+  --prose-bold: #c0caf5;
+  --prose-code: #7aa2f7;
+  --prose-code-bg: #1a1b2e;
+  --prose-code-border: #292e42;
+  --prose-pre-bg: #0e0f1a;
+  --prose-muted: #565f89;
+  --prose-border: #292e42;
 }
 
 /* ── Theme: Gruvbox Dark ── */
@@ -40,6 +81,16 @@
   --color-red: #fb4934;
   --color-aberration-a: #fb4934;
   --color-aberration-b: #fabd2f;
+
+  --prose-body: #d5c4a1;
+  --prose-heading: #ebdbb2;
+  --prose-bold: #ebdbb2;
+  --prose-code: #fe8019;
+  --prose-code-bg: #1d2021;
+  --prose-code-border: #3c3836;
+  --prose-pre-bg: #0e0e0e;
+  --prose-muted: #7c6f64;
+  --prose-border: #3c3836;
 }
 
 /* ── Theme: Dracula ── */
@@ -51,6 +102,16 @@
   --color-red: #ff5555;
   --color-aberration-a: #ff5555;
   --color-aberration-b: #ff79c6;
+
+  --prose-body: #f8f8f2;
+  --prose-heading: #f8f8f2;
+  --prose-bold: #f8f8f2;
+  --prose-code: #bd93f9;
+  --prose-code-bg: #21222c;
+  --prose-code-border: #44475a;
+  --prose-pre-bg: #0e0f14;
+  --prose-muted: #6272a4;
+  --prose-border: #44475a;
 }
 
 /* ── Theme: Anonymous ── */
@@ -62,6 +123,16 @@
   --color-red: #d0d0d0;
   --color-aberration-a: #ff2020;
   --color-aberration-b: #2060ff;
+
+  --prose-body: #c0c0c0;
+  --prose-heading: #e8e8e8;
+  --prose-bold: #e0e0e0;
+  --prose-code: #ffffff;
+  --prose-code-bg: #141414;
+  --prose-code-border: #1e1e1e;
+  --prose-pre-bg: #0a0a0a;
+  --prose-muted: #666666;
+  --prose-border: #1e1e1e;
 }
 
 /* ── Theme: Bloodmoon ── */
@@ -73,6 +144,16 @@
   --color-red: #ff1a1a;
   --color-aberration-a: #ff1a1a;
   --color-aberration-b: #cc3333;
+
+  --prose-body: #c0a8a8;
+  --prose-heading: #e0c8c8;
+  --prose-bold: #e0c8c8;
+  --prose-code: #ff3333;
+  --prose-code-bg: #1a1010;
+  --prose-code-border: #2a1a1a;
+  --prose-pre-bg: #0e0808;
+  --prose-muted: #7a5a5a;
+  --prose-border: #2a1a1a;
 }
 
 /* ── Base styles ── */

@@ -49,7 +49,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
+      htmlAttrs: { lang: 'en', class: 'dark' },
       title: '0xw0tan',
       meta: [
         { name: 'description', content: 'Personal site and tech blog by 0xw0tan — backend engineering, security, and software craft.' },
@@ -61,7 +61,7 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          innerHTML: `(function(){try{var t=localStorage.getItem('theme');if(t&&t!=='catppuccin'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}})()`,
+          innerHTML: `(function(){try{var t=localStorage.getItem('theme');if(t&&t!=='w0tan'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}})()`,
           type: 'text/javascript',
           tagPosition: 'head',
         },

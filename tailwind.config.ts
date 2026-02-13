@@ -40,20 +40,20 @@ export default <Config>{
       typography: {
         DEFAULT: {
           css: {
-            '--tw-prose-body': '#a8a8a8',
-            '--tw-prose-headings': '#e8e8e8',
+            '--tw-prose-body': 'var(--prose-body)',
+            '--tw-prose-headings': 'var(--prose-heading)',
             '--tw-prose-links': 'var(--color-accent)',
-            '--tw-prose-bold': '#d4d4d4',
-            '--tw-prose-code': '#c0c0c0',
-            '--tw-prose-pre-bg': '#0a0a0a',
-            '--tw-prose-pre-code': '#a8a8a8',
-            '--tw-prose-quotes': '#888888',
-            '--tw-prose-quote-borders': '#2a2a2a',
-            '--tw-prose-counters': '#888888',
-            '--tw-prose-bullets': '#555555',
-            '--tw-prose-hr': '#1a1a1a',
-            '--tw-prose-th-borders': '#1a1a1a',
-            '--tw-prose-td-borders': '#1a1a1a',
+            '--tw-prose-bold': 'var(--prose-bold)',
+            '--tw-prose-code': 'var(--prose-code)',
+            '--tw-prose-pre-bg': 'var(--prose-pre-bg)',
+            '--tw-prose-pre-code': 'var(--prose-body)',
+            '--tw-prose-quotes': 'var(--prose-muted)',
+            '--tw-prose-quote-borders': 'var(--prose-border)',
+            '--tw-prose-counters': 'var(--prose-muted)',
+            '--tw-prose-bullets': 'var(--prose-muted)',
+            '--tw-prose-hr': 'var(--prose-border)',
+            '--tw-prose-th-borders': 'var(--prose-border)',
+            '--tw-prose-td-borders': 'var(--prose-border)',
             // Headings
             h1: {
               fontWeight: '600',
@@ -88,10 +88,10 @@ export default <Config>{
               marginBottom: '0.3em',
             },
             'ul > li::marker': {
-              color: '#555555',
+              color: 'var(--prose-muted)',
             },
             'ol > li::marker': {
-              color: '#666666',
+              color: 'var(--prose-muted)',
             },
             // Links
             a: {
@@ -99,31 +99,31 @@ export default <Config>{
               textDecoration: 'none',
             },
             'a:hover': {
-              color: '#ffffff',
+              color: 'var(--prose-heading)',
             },
             // Inline code
             'code::before': { content: '""' },
             'code::after': { content: '""' },
             code: {
-              backgroundColor: '#111111',
+              backgroundColor: 'var(--prose-code-bg)',
               padding: '0.15em 0.4em',
               borderRadius: '0.2rem',
               fontWeight: '400',
               fontSize: '0.875em',
-              border: '1px solid #1a1a1a',
+              border: '1px solid var(--prose-code-border)',
             },
             // Block quotes
             blockquote: {
               fontStyle: 'normal',
               borderLeftWidth: '2px',
-              borderLeftColor: '#2a2a2a',
+              borderLeftColor: 'var(--prose-border)',
               paddingLeft: '1.25em',
             },
             'blockquote p:first-of-type::before': { content: '""' },
             'blockquote p:last-of-type::after': { content: '""' },
             // Horizontal rules
             hr: {
-              borderColor: '#1a1a1a',
+              borderColor: 'var(--prose-border)',
               marginTop: '2.5em',
               marginBottom: '2.5em',
             },
@@ -142,11 +142,11 @@ export default <Config>{
             },
             // Tables
             thead: {
-              borderBottomColor: '#2a2a2a',
+              borderBottomColor: 'var(--prose-border)',
             },
             'thead th': {
               fontWeight: '500',
-              color: '#c0c0c0',
+              color: 'var(--prose-heading)',
               paddingBottom: '0.75em',
             },
             'tbody td': {
