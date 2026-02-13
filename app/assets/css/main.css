@@ -16,6 +16,8 @@
   --color-tertiary: #f9e2af;
   --color-green: #a6e3a1;
   --color-red: #f38ba8;
+  --color-aberration-a: #f38ba8;
+  --color-aberration-b: #89b4fa;
 }
 
 /* ── Theme: Tokyo Night ── */
@@ -25,6 +27,8 @@
   --color-tertiary: #e0af68;
   --color-green: #9ece6a;
   --color-red: #f7768e;
+  --color-aberration-a: #f7768e;
+  --color-aberration-b: #bb9af7;
 }
 
 /* ── Theme: Gruvbox Dark ── */
@@ -34,6 +38,8 @@
   --color-tertiary: #8ec07c;
   --color-green: #b8bb26;
   --color-red: #fb4934;
+  --color-aberration-a: #fb4934;
+  --color-aberration-b: #fabd2f;
 }
 
 /* ── Theme: Dracula ── */
@@ -43,6 +49,30 @@
   --color-tertiary: #8be9fd;
   --color-green: #50fa7b;
   --color-red: #ff5555;
+  --color-aberration-a: #ff5555;
+  --color-aberration-b: #ff79c6;
+}
+
+/* ── Theme: Anonymous ── */
+[data-theme="anonymous"] {
+  --color-accent: #ffffff;
+  --color-secondary: #888888;
+  --color-tertiary: #b0b0b0;
+  --color-green: #a0a0a0;
+  --color-red: #d0d0d0;
+  --color-aberration-a: #ff2020;
+  --color-aberration-b: #2060ff;
+}
+
+/* ── Theme: Bloodmoon ── */
+[data-theme="bloodmoon"] {
+  --color-accent: #ff3333;
+  --color-secondary: #cc3333;
+  --color-tertiary: #b8602a;
+  --color-green: #6b7a5e;
+  --color-red: #ff1a1a;
+  --color-aberration-a: #ff1a1a;
+  --color-aberration-b: #cc3333;
 }
 
 /* ── Base styles ── */

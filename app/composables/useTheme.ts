@@ -1,4 +1,4 @@
-export type ThemeId = 'catppuccin' | 'tokyo-night' | 'gruvbox' | 'dracula'
+export type ThemeId = 'catppuccin' | 'tokyo-night' | 'gruvbox' | 'dracula' | 'anonymous' | 'bloodmoon'
 
 export interface ThemeOption {
   id: ThemeId
@@ -11,6 +11,8 @@ export const THEMES: ThemeOption[] = [
   { id: 'tokyo-night', name: 'Tokyo Night', accent: '#7aa2f7' },
   { id: 'gruvbox', name: 'Gruvbox', accent: '#fe8019' },
   { id: 'dracula', name: 'Dracula', accent: '#bd93f9' },
+  { id: 'anonymous', name: 'Anonymous', accent: '#ffffff' },
+  { id: 'bloodmoon', name: 'Bloodmoon', accent: '#ff3333' },
 ]
 
 export function useTheme() {

@@ -323,12 +323,12 @@ onUnmounted(() => {
 }
 
 .skull-aberration--red {
-  background-color: var(--color-red);
+  background-color: var(--color-aberration-a);
   transform: translate(-3px, 1px);
 }
 
 .skull-aberration--blue {
-  background-color: var(--color-secondary);
+  background-color: var(--color-aberration-b);
   transform: translate(3px, -1px);
 }
 
