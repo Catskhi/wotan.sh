@@ -7,7 +7,7 @@ export interface ThemeOption {
 }
 
 export const THEMES: ThemeOption[] = [
-  { id: 'w0tan', name: 'W0tan', accent: '#e0dcd4' },
+  { id: 'w0tan', name: 'W0tan', accent: '#b0bcc8' },
   { id: 'catppuccin', name: 'Catppuccin', accent: '#cba6f7' },
   { id: 'tokyo-night', name: 'Tokyo Night', accent: '#7aa2f7' },
   { id: 'gruvbox', name: 'Gruvbox', accent: '#fe8019' },

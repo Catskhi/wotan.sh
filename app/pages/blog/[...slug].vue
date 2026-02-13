@@ -14,9 +14,9 @@
     <header class="mb-8">
       <div class="flex items-center gap-2 text-2xs text-muted mb-3">
         <time :datetime="post.date">{{ formatDate(post.date) }}</time>
-        <span class="text-border-bright">/</span>
+        <span class="text-border-bright">᛬</span>
         <span>{{ post.category }}</span>
-        <span class="text-border-bright">/</span>
+        <span class="text-border-bright">᛬</span>
         <span>{{ readTime }} {{ t('common.min_read') }}</span>
       </div>
 
