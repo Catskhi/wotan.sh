@@ -138,40 +138,38 @@ function resizeCanvas() {
   canvasH = newH
 }
 
-// Offscreen canvas for tinting skulls
-let tintCanvas: HTMLCanvasElement | null = null
-let tintCtx: CanvasRenderingContext2D | null = null
+// Pre-rendered tinted skull canvases (open/closed × bright/dim)
+// Rendered once at a reference size, then drawn scaled via drawImage.
+const TINT_RENDER_SIZE = 128
+let tintedSkulls: Record<string, HTMLCanvasElement> = {}
 
-function getTintCanvas(size: number): CanvasRenderingContext2D | null {
-  if (!tintCanvas) {
-    tintCanvas = document.createElement('canvas')
-    tintCtx = tintCanvas.getContext('2d')
+function prerenderTintedSkulls() {
+  if (!skullOpenImg || !skullClosedImg) return
+  const variants: [string, HTMLImageElement, string][] = [
+    ['open-bright', skullOpenImg, BRIGHT_TINT],
+    ['open-dim', skullOpenImg, DIM_TINT],
+    ['closed-bright', skullClosedImg, BRIGHT_TINT],
+    ['closed-dim', skullClosedImg, DIM_TINT],
+  ]
+  const result: Record<string, HTMLCanvasElement> = {}
+  for (const [key, img, tint] of variants) {
+    const off = document.createElement('canvas')
+    off.width = TINT_RENDER_SIZE
+    off.height = TINT_RENDER_SIZE
+    const oc = off.getContext('2d')
+    if (!oc) continue
+    oc.drawImage(img, 0, 0, TINT_RENDER_SIZE, TINT_RENDER_SIZE)
+    oc.globalCompositeOperation = 'source-atop'
+    oc.fillStyle = tint
+    oc.fillRect(0, 0, TINT_RENDER_SIZE, TINT_RENDER_SIZE)
+    result[key] = off
   }
-  if (!tintCtx) return null
-  tintCanvas.width = size
-  tintCanvas.height = size
-  return tintCtx
+  tintedSkulls = result
 }
 
-function drawTintedSkull(
-  c: CanvasRenderingContext2D,
-  img: HTMLImageElement,
-  x: number, y: number, size: number,
-  tint: string, alpha: number,
-) {
-  const tc = getTintCanvas(size)
-  if (!tc) return
-  // Draw original skull
-  tc.clearRect(0, 0, size, size)
-  tc.drawImage(img, 0, 0, size, size)
-  // Tint: fill with color, using source-atop to only color opaque pixels
-  tc.globalCompositeOperation = 'source-atop'
-  tc.fillStyle = tint
-  tc.fillRect(0, 0, size, size)
-  tc.globalCompositeOperation = 'source-over'
-  // Draw to main canvas
-  c.globalAlpha = alpha
-  c.drawImage(tintCanvas!, x, y, size, size)
+function getTintedSkull(mouthOpen: boolean, bright: boolean): HTMLCanvasElement | null {
+  const key = `${mouthOpen ? 'open' : 'closed'}-${bright ? 'bright' : 'dim'}`
+  return tintedSkulls[key] ?? null
 }
 
 function updateAccentColor() {
@@ -263,36 +261,28 @@ function animate(time: number) {
       }
     }
 
-    // Draw
-    const img = p.mouthOpen ? skullOpenImg : skullClosedImg
-    const tint = p.bright ? BRIGHT_TINT : DIM_TINT
+    // Draw from pre-rendered tinted canvases
+    const cached = getTintedSkull(p.mouthOpen, p.bright)
+    if (!cached) continue
 
     if (p.isGlitching) {
       // Glitch draw — horizontal slices with random offsets + opacity flicker
       const flickerAlpha = Math.random() > 0.3 ? SKULL_OPACITY : SKULL_OPACITY * (0.3 + Math.random() * 0.7)
-
       const sliceH = p.size / GLITCH_SLICE_COUNT
-      for (let i = 0; i < GLITCH_SLICE_COUNT; i++) {
-        const srcY = (i / GLITCH_SLICE_COUNT) * img.naturalHeight
-        const srcH = img.naturalHeight / GLITCH_SLICE_COUNT
-        const offsetX = (Math.random() - 0.5) * GLITCH_MAX_OFFSET * 2
+      const srcSliceH = TINT_RENDER_SIZE / GLITCH_SLICE_COUNT
 
-        // Tint each glitch slice via offscreen canvas
-        const tc = getTintCanvas(Math.ceil(p.size))
-        if (tc) {
-          const sz = Math.ceil(p.size)
-          tc.clearRect(0, 0, sz, sz)
-          tc.drawImage(img, 0, srcY, img.naturalWidth, srcH, 0, 0, sz, sliceH)
-          tc.globalCompositeOperation = 'source-atop'
-          tc.fillStyle = tint
-          tc.fillRect(0, 0, sz, sliceH)
-          tc.globalCompositeOperation = 'source-over'
-          ctx.globalAlpha = Math.max(0.03, flickerAlpha)
-          ctx.drawImage(tintCanvas!, p.x + offsetX, p.y + sliceH * i, sz, sliceH)
-        }
+      for (let i = 0; i < GLITCH_SLICE_COUNT; i++) {
+        const offsetX = (Math.random() - 0.5) * GLITCH_MAX_OFFSET * 2
+        ctx.globalAlpha = Math.max(0.03, flickerAlpha)
+        ctx.drawImage(
+          cached,
+          0, srcSliceH * i, TINT_RENDER_SIZE, srcSliceH,
+          p.x + offsetX, p.y + sliceH * i, p.size, sliceH,
+        )
       }
     } else {
-      drawTintedSkull(ctx, img, p.x, p.y, p.size, tint, SKULL_OPACITY)
+      ctx.globalAlpha = SKULL_OPACITY
+      ctx.drawImage(cached, p.x, p.y, p.size, p.size)
     }
 
     // Respawn if off-screen
@@ -340,6 +330,7 @@ onMounted(async () => {
   ])
   skullOpenImg = openImg
   skullClosedImg = closedImg
+  prerenderTintedSkulls()
 
   updateAccentColor()
   resizeCanvas()
