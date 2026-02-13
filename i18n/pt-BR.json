@@ -10,25 +10,25 @@
   "hero": {
     "greeting": "Ola, eu sou",
     "name": "0xw0tan",
-    "tagline": "Engenheiro backend & entusiasta de seguranca",
+    "tagline": "Engenheiro backend & entusiasta de segurança",
     "taglines": [
-      "engenheiro backend & entusiasta de seguranca"
+      "engenheiro backend & entusiasta de segurança"
     ],
-    "subtitle": "Escrevo sobre engenharia de software, seguranca e as ferramentas que construo.",
+    "subtitle": "Escrevo sobre engenharia de software, segurança e as ferramentas que construo.",
     "cta_blog": "Ler o blog",
     "cta_projects": "Ver projetos",
     "latest": "recente",
     "search_hint": "ctrl+k para buscar",
     "neofetch": {
       "stack": "java / go / ts / python",
-      "focus": "backend & seguranca",
+      "focus": "backend & segurança",
       "shell": "fish",
       "theme": "catppuccin"
     }
   },
   "blog": {
     "title": "Blog",
-    "description": "Reflexoes sobre engenharia backend, seguranca e desenvolvimento de software.",
+    "description": "Reflexoes sobre engenharia backend, segurança e desenvolvimento de software.",
     "all_tags": "Todos",
     "no_posts": "Nenhum post encontrado.",
     "recent_posts": "Posts Recentes",
@@ -44,8 +44,8 @@
     "title": "Sobre",
     "description": "Um pouco sobre mim.",
     "bio_title": "whoami",
-    "bio_p1": "Engenheiro backend que se preocupa com arquitetura limpa, seguranca e construir ferramentas que funcionam bem. Passo a maior parte do tempo escrevendo Java, Go e TypeScript — geralmente com um terminal aberto e uma opiniao forte sobre indentacao.",
-    "bio_p2": "Quando nao estou programando, provavelmente estou lendo sobre sistemas distribuidos, mexendo em configs do Linux, ou mergulhando em algum assunto de seguranca. Este site e onde documento o que aprendo.",
+    "bio_p1": "Engenheiro backend que se preocupa com arquitetura limpa, segurança e construir ferramentas que funcionam bem. Passo a maior parte do tempo escrevendo Java, Go e TypeScript — geralmente com um terminal aberto e uma opiniao forte sobre indentacao.",
+    "bio_p2": "Quando nao estou programando, provavelmente estou lendo sobre sistemas distribuidos, mexendo em configs do Linux, ou mergulhando em algum assunto de segurança. Este site e onde documento o que aprendo.",
     "skills_title": "Habilidades",
     "connect_title": "Contato"
   },
