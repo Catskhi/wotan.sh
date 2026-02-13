@@ -27,7 +27,7 @@
     >
       <div
         v-if="open"
-        class="fixed top-[15vh] left-1/2 -translate-x-1/2 w-[90vw] max-w-lg bg-surface border border-border rounded-lg shadow-2xl z-[101] overflow-hidden"
+        class="fixed top-[8vh] sm:top-[15vh] left-1/2 -translate-x-1/2 w-[90vw] max-w-lg bg-surface border border-border rounded-lg shadow-2xl z-[101] overflow-hidden"
       >
         <!-- Search input -->
         <div class="flex items-center gap-2 px-4 py-3 border-b border-border">
@@ -47,7 +47,7 @@
         </div>
 
         <!-- Results -->
-        <div class="max-h-[50vh] overflow-y-auto py-1">
+        <div class="max-h-[60vh] sm:max-h-[50vh] overflow-y-auto py-1">
           <div v-if="results.length === 0 && query" class="px-4 py-6 text-center text-xs text-muted">
             {{ t('palette.no_results') }}
           </div>
@@ -93,7 +93,7 @@
         </div>
 
         <!-- Footer hint -->
-        <div class="border-t border-border px-4 py-2 flex items-center gap-4 text-2xs text-muted/50">
+        <div class="border-t border-border px-4 py-2 hidden sm:flex items-center gap-4 text-2xs text-muted/50">
           <span><kbd class="border border-border rounded px-1 py-0.5">↑↓</kbd> navigate</span>
           <span><kbd class="border border-border rounded px-1 py-0.5">↵</kbd> select</span>
           <span><kbd class="border border-border rounded px-1 py-0.5">esc</kbd> close</span>

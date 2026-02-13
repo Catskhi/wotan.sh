@@ -1,18 +1,27 @@
 <template>
   <div class="min-h-screen bg-bg font-mono flex flex-col items-center justify-center px-4 text-center">
-    <pre class="text-accent text-xs sm:text-sm mb-6 select-none leading-tight">{{ ASCII_SKULL }}</pre>
+    <!-- Othala rune — large, stark -->
+    <div class="text-accent text-6xl sm:text-8xl mb-6 select-none" aria-hidden="true">ᛟ</div>
 
-    <h1 class="text-xl font-semibold text-gray-100 mb-2">
-      {{ is404 ? 'SIGSEGV' : 'SIGABRT' }}
+    <!-- ASCII Huginn & Muninn (Odin's ravens) -->
+    <pre class="text-muted text-2xs sm:text-xs mb-6 select-none leading-tight" aria-hidden="true">{{ ASCII_RAVENS }}</pre>
+
+    <h1 class="text-lg sm:text-xl font-semibold text-gray-100 mb-2">
+      {{ is404 ? 'Ginnungagap' : 'SIGABRT' }}
     </h1>
 
     <p class="text-sm text-muted mb-1">
-      {{ is404 ? 'Segmentation fault — page not found' : 'Something went wrong' }}
+      {{ is404 ? 'You wander into the void between worlds.' : 'Something went wrong.' }}
     </p>
 
-    <p class="text-2xs text-border-bright mb-6">
-      {{ is404 ? `exit code 404` : `exit code ${error?.statusCode || 500}` }}
+    <p class="text-2xs text-border-bright mb-1">
+      {{ is404 ? 'The path you seek does not exist.' : `exit code ${error?.statusCode || 500}` }}
     </p>
+
+    <p v-if="is404" class="text-2xs text-muted/40 mb-6">
+      exit code 404
+    </p>
+    <div v-else class="mb-6" />
 
     <button
       @click="handleError"
@@ -24,7 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import { ASCII_SKULL } from '~/utils/ascii'
+const ASCII_RAVENS = `  ⟋⟍     ⟋⟍
+ (o  )   (  o)
+  ╰─╯ᚺᚢᚷ╰─╯`
 
 const props = defineProps<{
   error: {

@@ -6,9 +6,9 @@
     <!-- Meta row -->
     <div class="flex items-center gap-2 text-2xs text-muted mb-1.5">
       <time :datetime="post.date">{{ formatDate(post.date) }}</time>
-      <span class="text-border-bright">/</span>
+      <span class="text-border-bright">᛬</span>
       <span>{{ post.category }}</span>
-      <span v-if="readTime" class="text-border-bright">/</span>
+      <span v-if="readTime" class="text-border-bright">᛬</span>
       <span v-if="readTime">{{ readTime }} {{ t('common.min_read') }}</span>
     </div>
 

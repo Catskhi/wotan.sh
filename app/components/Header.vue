@@ -41,19 +41,32 @@
         <ThemeSwitcher />
       </nav>
 
-      <!-- Mobile menu button -->
-      <button
-        class="md:hidden p-2 text-muted hover:text-accent transition-colors"
-        @click="mobileOpen = !mobileOpen"
-        :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
-      >
+      <!-- Mobile controls -->
+      <div class="md:hidden flex items-center gap-1">
+        <!-- Mobile search button -->
+        <button
+          class="p-2.5 text-muted hover:text-accent transition-colors"
+          @click="openPalette"
+          aria-label="Search"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+        <!-- Mobile menu button -->
+        <button
+          class="p-2.5 text-muted hover:text-accent transition-colors"
+          @click="mobileOpen = !mobileOpen"
+          :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
+        >
         <svg v-if="!mobileOpen" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
         <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
         </svg>
-      </button>
+        </button>
+      </div>
     </div>
 
     <!-- Mobile menu -->
@@ -71,7 +84,7 @@
             v-for="link in navLinks"
             :key="link.path"
             :to="localePath(link.path)"
-            class="px-3 py-2 text-sm text-muted hover:text-accent transition-colors"
+            class="px-3 py-2.5 text-sm text-muted hover:text-accent transition-colors"
             active-class="!text-accent"
             @click="mobileOpen = false"
           >

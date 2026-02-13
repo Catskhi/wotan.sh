@@ -105,6 +105,9 @@ function initParticles(w: number, h: number) {
   particles = Array.from({ length: count }, () => createParticle(w, h, false))
 }
 
+let canvasW = 0
+let canvasH = 0
+
 function resizeCanvas() {
   if (!canvas.value) return
   const parent = canvas.value.parentElement
@@ -112,16 +115,27 @@ function resizeCanvas() {
 
   const dpr = window.devicePixelRatio || 1
   const rect = parent.getBoundingClientRect()
-  canvas.value.width = rect.width * dpr
-  canvas.value.height = rect.height * dpr
-  canvas.value.style.width = `${rect.width}px`
-  canvas.value.style.height = `${rect.height}px`
+  const newW = rect.width
+  const newH = rect.height
+
+  canvas.value.width = newW * dpr
+  canvas.value.height = newH * dpr
+  canvas.value.style.width = `${newW}px`
+  canvas.value.style.height = `${newH}px`
 
   if (ctx) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
   }
 
-  initParticles(rect.width, rect.height)
+  // Only reinit particles if width changed or this is the first call.
+  // Height-only changes (mobile browser chrome hide/show) preserve particles.
+  const widthChanged = Math.abs(newW - canvasW) > 1
+  if (particles.length === 0 || widthChanged) {
+    initParticles(newW, newH)
+  }
+
+  canvasW = newW
+  canvasH = newH
 }
 
 // Offscreen canvas for tinting skulls
@@ -207,11 +221,9 @@ let lastTime = 0
 function animate(time: number) {
   if (!ctx || !canvas.value || !skullOpenImg || !skullClosedImg) return
 
-  const parent = canvas.value.parentElement
-  if (!parent) return
-  const rect = parent.getBoundingClientRect()
-  const w = rect.width
-  const h = rect.height
+  const w = canvasW
+  const h = canvasH
+  if (!w || !h) return
 
   const dt = lastTime ? (time - lastTime) / 1000 : 0.016
   lastTime = time

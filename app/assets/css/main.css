@@ -11,9 +11,9 @@
 
 /* ── Theme: W0tan (default) ── */
 :root {
-  --color-accent: #e0dcd4;
+  --color-accent: #b0bcc8;
   --color-secondary: #8a9aad;
-  --color-tertiary: #9a8e78;
+  --color-tertiary: #e0dcd4;
   --color-green: #7a8a6e;
   --color-red: #8a4444;
   --color-aberration-a: #884444;
@@ -22,7 +22,7 @@
   --prose-body: #b8b4ae;
   --prose-heading: #e0dcd4;
   --prose-bold: #d4d0c8;
-  --prose-code: #d4d0c8;
+  --prose-code: #a8b4c0;
   --prose-code-bg: #141210;
   --prose-code-border: #1e1c18;
   --prose-pre-bg: #0a0a08;
@@ -163,8 +163,8 @@
   }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: #050505;
+    background-color: var(--color-tertiary);
+    color: #0a0a08;
   }
 
   /* Scrollbar */
@@ -191,6 +191,12 @@
     scrollbar-width: thin;
     scrollbar-color: #2a2a2a #050505;
   }
+}
+
+/* ── Prose overflow protection ── */
+.prose {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* ── Prose link underline animation ── */

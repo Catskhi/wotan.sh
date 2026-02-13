@@ -134,6 +134,8 @@ export default <Config>{
             // Images
             img: {
               borderRadius: '0.375rem',
+              maxWidth: '100%',
+              height: 'auto',
             },
             // Pre
             pre: {
