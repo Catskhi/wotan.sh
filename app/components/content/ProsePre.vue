@@ -12,7 +12,7 @@
     <!-- Copy button -->
     <button
       @click="copy"
-      class="absolute top-2 right-2 px-2 py-0.5 text-2xs hover:text-accent rounded opacity-0 group-hover:opacity-100 transition-all z-10"
+      class="absolute top-2 right-2 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center px-2 py-0.5 text-2xs hover:text-accent rounded opacity-60 sm:opacity-0 sm:group-hover:opacity-100 transition-all z-10"
       style="color: var(--prose-muted)"
       :aria-label="copied ? 'Copied' : 'Copy code'"
     >

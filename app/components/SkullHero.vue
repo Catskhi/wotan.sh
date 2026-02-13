@@ -33,7 +33,7 @@
         :class="showName ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'"
         aria-hidden="true"
       >
-        <pre class="text-accent text-[0.35rem] sm:text-[0.5rem] md:text-[0.6rem] leading-none font-mono select-none"><template v-for="(line, i) in asciiName" :key="i">{{ line }}
+        <pre class="text-accent text-[0.45rem] sm:text-[0.5rem] md:text-[0.6rem] leading-none font-mono select-none"><template v-for="(line, i) in asciiName" :key="i">{{ line }}
 </template></pre>
       </div>
 
@@ -46,7 +46,7 @@
         :class="showTagline ? 'opacity-100' : 'opacity-0'"
       >
         <span>{{ displayedTagline }}</span>
-        <span class="animate-blink text-accent">_</span>
+        <span class="cursor-rune text-accent">{{ cursorChar }}</span>
       </p>
 
       <!-- Neofetch info block -->
@@ -74,18 +74,18 @@
 
       <!-- CTA buttons -->
       <div
-        class="flex items-center gap-4 transition-all duration-500"
+        class="flex flex-col sm:flex-row items-center gap-4 transition-all duration-500"
         :class="showCta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'"
       >
         <NuxtLink
           :to="localePath('/blog')"
-          class="group px-5 py-2.5 text-xs sm:text-sm border border-accent text-accent hover:bg-accent hover:text-bg transition-all duration-200"
+          class="group px-5 py-3 sm:py-2.5 text-xs sm:text-sm border border-accent text-accent hover:bg-accent hover:text-bg transition-all duration-200"
         >
           {{ t('hero.cta_blog') }}
         </NuxtLink>
         <NuxtLink
           :to="localePath('/projects')"
-          class="px-5 py-2.5 text-xs sm:text-sm border border-border text-muted hover:border-accent hover:text-accent transition-all duration-200"
+          class="px-5 py-3 sm:py-2.5 text-xs sm:text-sm border border-border text-muted hover:border-accent hover:text-accent transition-all duration-200"
         >
           {{ t('hero.cta_projects') }}
         </NuxtLink>
@@ -164,6 +164,11 @@ const taglines = computed(() => {
 
 const chosenTagline = ref('')
 const displayedTagline = ref('')
+
+// Cursor blink — alternates _ with a rune
+const CURSOR_RUNES = ['ᚦ', 'ᚨ', 'ᚾ', 'ᛟ', 'ᚱ', 'ᛗ']
+const cursorChar = ref('_')
+const cursorRuneIdx = ref(0)
 
 // Skull animation state
 const mouthOpen = ref(false)
@@ -261,12 +266,24 @@ onMounted(async () => {
 
   // Start periodic glitches after entrance completes
   setTimeout(() => scheduleGlitch(), 3000)
+
+  // Cursor blink: alternate _ and rune every 530ms
+  cursorTimer = window.setInterval(() => {
+    if (cursorChar.value === '_') {
+      cursorChar.value = CURSOR_RUNES[cursorRuneIdx.value]
+      cursorRuneIdx.value = (cursorRuneIdx.value + 1) % CURSOR_RUNES.length
+    } else {
+      cursorChar.value = '_'
+    }
+  }, 530)
 })
 
 let glitchTimer: number | undefined
+let cursorTimer: number | undefined
 
 onUnmounted(() => {
   if (glitchTimer) window.clearTimeout(glitchTimer)
+  if (cursorTimer) window.clearInterval(cursorTimer)
 })
 </script>
 
@@ -415,6 +432,13 @@ onUnmounted(() => {
 .ascii-name pre {
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+/* Cursor rune blink */
+.cursor-rune {
+  display: inline-block;
+  width: 0.6em;
+  text-align: center;
 }
 
 /* Neofetch grid alignment */
