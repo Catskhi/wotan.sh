@@ -1,4 +1,4 @@
-export type ThemeId = 'catppuccin' | 'tokyo-night' | 'gruvbox' | 'dracula' | 'anonymous' | 'bloodmoon'
+export type ThemeId = 'w0tan' | 'catppuccin' | 'tokyo-night' | 'gruvbox' | 'dracula' | 'anonymous' | 'bloodmoon'
 
 export interface ThemeOption {
   id: ThemeId
@@ -7,6 +7,7 @@ export interface ThemeOption {
 }
 
 export const THEMES: ThemeOption[] = [
+  { id: 'w0tan', name: 'W0tan', accent: '#e0dcd4' },
   { id: 'catppuccin', name: 'Catppuccin', accent: '#cba6f7' },
   { id: 'tokyo-night', name: 'Tokyo Night', accent: '#7aa2f7' },
   { id: 'gruvbox', name: 'Gruvbox', accent: '#fe8019' },
@@ -16,13 +17,12 @@ export const THEMES: ThemeOption[] = [
 ]
 
 export function useTheme() {
-  const current = useState<ThemeId>('theme', () => 'catppuccin')
+  const current = useState<ThemeId>('theme', () => 'w0tan')
 
   function setTheme(id: ThemeId) {
     current.value = id
     if (import.meta.client) {
-      const attr = id === 'catppuccin' ? '' : id
-      document.documentElement.setAttribute('data-theme', attr)
+      document.documentElement.setAttribute('data-theme', id === 'w0tan' ? '' : id)
       localStorage.setItem('theme', id)
     }
   }

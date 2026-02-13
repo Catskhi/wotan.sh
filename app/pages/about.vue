@@ -15,7 +15,7 @@
       </div>
     </header>
 
-    <BoxDivider />
+    <BoxDivider :runes="true" />
 
     <!-- Bio -->
     <section class="mb-8">
@@ -28,7 +28,7 @@
     </section>
 
     <!-- Skills -->
-    <BoxDivider :label="t('about.skills_title')" />
+    <BoxDivider :label="t('about.skills_title')" :runes="true" />
 
     <section class="mb-8">
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -43,7 +43,7 @@
     </section>
 
     <!-- Connect -->
-    <BoxDivider :label="t('about.connect_title')" />
+    <BoxDivider :label="t('about.connect_title')" :runes="true" />
 
     <section>
       <SocialLinks />

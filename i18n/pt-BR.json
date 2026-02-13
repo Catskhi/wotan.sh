@@ -23,16 +23,25 @@
       "stack": "java / go / ts / python",
       "focus": "backend & segurança",
       "shell": "fish",
-      "theme": "catppuccin"
+      "theme": "w0tan"
     }
   },
   "blog": {
     "title": "Blog",
     "description": "Reflexoes sobre engenharia backend, segurança e desenvolvimento de software.",
     "all_tags": "Todos",
+    "all_categories": "Todos",
     "no_posts": "Nenhum post encontrado.",
     "recent_posts": "Posts Recentes",
-    "view_all": "Ver todos os posts"
+    "view_all": "Ver todos os posts",
+    "categories": {
+      "write-up": "Write-ups",
+      "deep-dive": "Aprofundamentos",
+      "til": "TIL",
+      "project": "Projetos",
+      "tool": "Ferramentas",
+      "opinion": "Opiniao"
+    }
   },
   "projects": {
     "title": "Projetos",

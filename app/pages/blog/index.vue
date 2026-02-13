@@ -9,6 +9,26 @@
       </p>
     </header>
 
+    <!-- Category filter -->
+    <div v-if="allCategories.length" class="flex flex-wrap gap-2 mb-4">
+      <button
+        class="text-xs font-mono px-2 py-0.5 border transition-colors"
+        :class="!activeCategory ? 'border-accent text-accent' : 'border-border text-muted hover:text-accent hover:border-accent/50'"
+        @click="activeCategory = ''; activeTag = ''"
+      >
+        {{ t('blog.all_categories') }}
+      </button>
+      <button
+        v-for="cat in allCategories"
+        :key="cat"
+        class="text-xs font-mono px-2 py-0.5 border transition-colors"
+        :class="activeCategory === cat ? 'border-accent text-accent' : 'border-border text-muted hover:text-accent hover:border-accent/50'"
+        @click="activeCategory = activeCategory === cat ? '' : cat; activeTag = ''"
+      >
+        {{ t(`blog.categories.${cat}`) }}
+      </button>
+    </div>
+
     <!-- Tag filter -->
     <div v-if="allTags.length" class="flex flex-wrap gap-1.5 mb-6">
       <TagBadge
@@ -56,19 +76,36 @@ const { data: posts } = await useAsyncData(
     .all()
 )
 
+const activeCategory = ref('')
 const activeTag = ref('')
+
+const allCategories = computed(() => {
+  if (!posts.value) return []
+  const cats = new Set<string>()
+  posts.value.forEach(p => { if (p.category) cats.add(p.category) })
+  return [...cats].sort()
+})
 
 const allTags = computed(() => {
   if (!posts.value) return []
   const tags = new Set<string>()
-  posts.value.forEach(p => p.tags?.forEach(t => tags.add(t)))
+  const source = activeCategory.value
+    ? posts.value.filter(p => p.category === activeCategory.value)
+    : posts.value
+  source.forEach(p => p.tags?.forEach(t => tags.add(t)))
   return [...tags].sort()
 })
 
 const filteredPosts = computed(() => {
   if (!posts.value) return []
-  if (!activeTag.value) return posts.value
-  return posts.value.filter(p => p.tags?.includes(activeTag.value))
+  let result = posts.value
+  if (activeCategory.value) {
+    result = result.filter(p => p.category === activeCategory.value)
+  }
+  if (activeTag.value) {
+    result = result.filter(p => p.tags?.includes(activeTag.value))
+  }
+  return result
 })
 
 useHead({

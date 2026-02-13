@@ -59,16 +59,16 @@
         </div>
         <div class="text-border-bright text-xs select-none my-1" aria-hidden="true">──────────</div>
         <div class="neofetch-grid text-xs font-mono">
-          <span class="text-muted">stack</span><span class="text-border-bright mx-2">~</span><span class="text-gray-300">{{ neofetch.stack }}</span>
+          <span class="text-muted">stack</span><span class="text-border-bright mx-2">᛬</span><span class="text-gray-300">{{ neofetch.stack }}</span>
         </div>
         <div class="neofetch-grid text-xs font-mono">
-          <span class="text-muted">focus</span><span class="text-border-bright mx-2">~</span><span class="text-gray-300">{{ neofetch.focus }}</span>
+          <span class="text-muted">focus</span><span class="text-border-bright mx-2">᛬</span><span class="text-gray-300">{{ neofetch.focus }}</span>
         </div>
         <div class="neofetch-grid text-xs font-mono">
-          <span class="text-muted">shell</span><span class="text-border-bright mx-2">~</span><span class="text-gray-300">{{ neofetch.shell }}</span>
+          <span class="text-muted">shell</span><span class="text-border-bright mx-2">᛬</span><span class="text-gray-300">{{ neofetch.shell }}</span>
         </div>
         <div class="neofetch-grid text-xs font-mono">
-          <span class="text-muted">theme</span><span class="text-border-bright mx-2">~</span><span class="text-accent">{{ currentThemeName }}</span>
+          <span class="text-muted">theme</span><span class="text-border-bright mx-2">᛬</span><span class="text-accent">{{ currentThemeName }}</span>
         </div>
       </div>
 

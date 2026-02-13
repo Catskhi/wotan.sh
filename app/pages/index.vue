@@ -7,7 +7,7 @@
 
     <!-- Recent posts section -->
     <section class="mt-2">
-      <BoxDivider :label="t('blog.recent_posts')" />
+      <BoxDivider :label="t('blog.recent_posts')" :runes="true" />
 
       <div class="space-y-2">
         <PostCard
@@ -29,7 +29,7 @@
 
     <!-- About snippet -->
     <section class="mt-12">
-      <BoxDivider :label="t('about.bio_title')" />
+      <BoxDivider :label="t('about.bio_title')" :runes="true" />
       <p class="text-sm text-gray-300 leading-relaxed mb-3">
         {{ t('about.bio_p1') }}
       </p>

@@ -39,7 +39,7 @@
     <BoxDivider />
 
     <!-- Content -->
-    <article class="prose prose-invert max-w-none">
+    <article class="prose max-w-none">
       <ContentRenderer :value="post" />
     </article>
 
