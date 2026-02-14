@@ -61,7 +61,7 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          innerHTML: `(function(){try{var t=localStorage.getItem('theme');if(t&&t!=='w0tan'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}})()`,
+          innerHTML: `(function(){try{var t=localStorage.getItem('theme');if(t&&t!=='anonymous'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}})()`,
           type: 'text/javascript',
           tagPosition: 'head',
         },

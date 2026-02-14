@@ -9,8 +9,29 @@
   font-display: swap;
 }
 
-/* ── Theme: W0tan (default) ── */
+/* ── Theme: Anonymous (default) ── */
 :root {
+  --color-accent: #ffffff;
+  --color-secondary: #888888;
+  --color-tertiary: #b0b0b0;
+  --color-green: #a0a0a0;
+  --color-red: #d0d0d0;
+  --color-aberration-a: #ff2020;
+  --color-aberration-b: #2060ff;
+
+  --prose-body: #c0c0c0;
+  --prose-heading: #e8e8e8;
+  --prose-bold: #e0e0e0;
+  --prose-code: #ffffff;
+  --prose-code-bg: #141414;
+  --prose-code-border: #1e1e1e;
+  --prose-pre-bg: #0a0a0a;
+  --prose-muted: #666666;
+  --prose-border: #1e1e1e;
+}
+
+/* ── Theme: W0tan ── */
+[data-theme="w0tan"] {
   --color-accent: #b0bcc8;
   --color-secondary: #8a9aad;
   --color-tertiary: #e0dcd4;
@@ -114,26 +135,6 @@
   --prose-border: #44475a;
 }
 
-/* ── Theme: Anonymous ── */
-[data-theme="anonymous"] {
-  --color-accent: #ffffff;
-  --color-secondary: #888888;
-  --color-tertiary: #b0b0b0;
-  --color-green: #a0a0a0;
-  --color-red: #d0d0d0;
-  --color-aberration-a: #ff2020;
-  --color-aberration-b: #2060ff;
-
-  --prose-body: #c0c0c0;
-  --prose-heading: #e8e8e8;
-  --prose-bold: #e0e0e0;
-  --prose-code: #ffffff;
-  --prose-code-bg: #141414;
-  --prose-code-border: #1e1e1e;
-  --prose-pre-bg: #0a0a0a;
-  --prose-muted: #666666;
-  --prose-border: #1e1e1e;
-}
 
 /* ── Theme: Bloodmoon ── */
 [data-theme="bloodmoon"] {
