@@ -3,7 +3,7 @@ export const SITE_NAME = '0xw0tan'
 export const SOCIAL_LINKS = [
   {
     name: 'GitHub',
-    url: 'https://github.com/0xw0tan',
+    url: 'https://github.com/Catskhi',
     icon: 'github',
   },
   {
@@ -13,7 +13,7 @@ export const SOCIAL_LINKS = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/0xw0tan',
+    url: 'https://www.linkedin.com/in/enzo-pablo/',
     icon: 'linkedin',
   },
 ] as const
