@@ -53,8 +53,8 @@
     "title": "About",
     "description": "A bit about me.",
     "bio_title": "whoami",
-    "bio_p1": "Backend engineer who cares about clean architecture, security, and building tools that work well. I spend most of my time writing Java, Go, and TypeScript — usually with a terminal open and a strong opinion about indentation.",
-    "bio_p2": "When I'm not writing code, I'm probably reading about distributed systems, tinkering with Linux configs, or going down a security rabbit hole. This site is where I document what I learn.",
+    "bio_p1": "Hi, I'm 0xw0tan. Yes, Wotan from \"Odin\". I'm a software engineer who likes to build things, break things, and write about both. I really like programming, security, and especially low-level (I'll still be good at this someday).",
+    "bio_p2": "When I'm not programming or studying about hacking/IT topics, I'm probally reading about philosophy (especially Nietzsche). This site is where you can read about some of my thoughts and projects.",
     "skills_title": "Skills",
     "connect_title": "Connect"
   },
