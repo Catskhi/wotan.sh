@@ -44,13 +44,12 @@
 </template>
 
 <script setup lang="ts">
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const localePath = useLocalePath()
 
 const { data: posts } = await useAsyncData(
-  `home-posts-${locale.value}`,
+  'home-posts',
   () => queryCollection('blog')
-    .where('lang', '=', locale.value)
     .where('draft', '=', false)
     .order('date', 'DESC')
     .limit(5)

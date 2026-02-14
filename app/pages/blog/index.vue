@@ -65,12 +65,11 @@
 </template>
 
 <script setup lang="ts">
-const { t, locale } = useI18n()
+const { t } = useI18n()
 
 const { data: posts } = await useAsyncData(
-  `blog-posts-${locale.value}`,
+  'blog-posts',
   () => queryCollection('blog')
-    .where('lang', '=', locale.value)
     .where('draft', '=', false)
     .order('date', 'DESC')
     .all()

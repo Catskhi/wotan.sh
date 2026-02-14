@@ -36,8 +36,6 @@
           </svg>
           <kbd class="text-2xs text-muted/60">⌘K</kbd>
         </button>
-        <div class="w-px h-4 bg-border mx-1.5" />
-        <LanguageSwitcher />
         <ThemeSwitcher />
       </nav>
 
@@ -92,7 +90,6 @@
           </NuxtLink>
           <div class="border-t border-border my-1" />
           <div class="flex items-center gap-2 px-3 py-2">
-            <LanguageSwitcher />
             <ThemeSwitcher />
           </div>
         </nav>

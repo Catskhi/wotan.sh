@@ -5,7 +5,6 @@ date: 2026-02-05
 tags: ["meta", "nuxt", "cloudflare"]
 category: "til"
 draft: false
-lang: "en"
 ---
 
 # Hello World

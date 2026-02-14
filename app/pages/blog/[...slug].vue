@@ -60,19 +60,16 @@
 <script setup lang="ts">
 import { estimateReadingTime } from '~/utils/readingTime'
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
 
-// Strip locale prefix from slug for content query
-const rawSlug = (route.params.slug as string[])?.join('/') || ''
-const slug = rawSlug.replace(/^(pt-BR|en)\//, '')
+const slug = (route.params.slug as string[])?.join('/') || ''
 
 const { data: post } = await useAsyncData(
-  `blog-post-${slug}-${locale.value}`,
+  `blog-post-${slug}`,
   () => queryCollection('blog')
     .where('stem', '=', `blog/${slug}`)
-    .where('lang', '=', locale.value)
     .first()
 )
 

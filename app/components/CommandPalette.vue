@@ -111,7 +111,7 @@ interface PaletteItem {
   type: 'nav' | 'post'
 }
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
 
@@ -122,9 +122,8 @@ const inputRef = ref<HTMLInputElement | null>(null)
 
 // Fetch posts for search
 const { data: allPosts } = await useAsyncData(
-  `palette-posts-${locale.value}`,
+  'palette-posts',
   () => queryCollection('blog')
-    .where('lang', '=', locale.value)
     .where('draft', '=', false)
     .order('date', 'DESC')
     .all()
